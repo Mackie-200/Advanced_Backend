@@ -10,7 +10,11 @@ function DeploymentInfo() {
       .then((res) => res.json())
       .then((result) => {
         if (result.error) {
-          setError(result.error);
+          const errorMessage =
+            typeof result.error === 'string'
+              ? result.error
+              : result.error.message || JSON.stringify(result.error);
+          setError(errorMessage);
         } else {
           setData(result);
         }
